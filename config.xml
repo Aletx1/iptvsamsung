@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns="http://www.w3.org/ns/widgets"
+        xmlns:tizen="http://tizen.org/ns/widgets"
+        id="http://ctvc/iptv"
+        version="1.0.0"
+        viewmodes="maximized">
+
+    <name>CTVC IPTV</name>
+
+    <content src="index.html"/>
+    <icon src="icon.png"/>
+
+    <!-- PERFIL TV -->
+    <tizen:profile name="tv"/>
+
+    <tizen:application
+    id="iptvsam010.iptv"
+    package="iptvsam010"
+    required_version="2.3"/>
+
+
+    <!-- PERMISOS -->
+    <tizen:privilege name="http://tizen.org/privilege/internet"/>
+    <tizen:privilege name="http://tizen.org/privilege/tv.inputdevice"/>
+    <tizen:privilege name="http://tizen.org/privilege/tv.audio"/>
+    <tizen:privilege name="http://tizen.org/privilege/tv.display"/>
+    <tizen:privilege name="http://developer.samsung.com/privilege/avplay"/>
+    <tizen:privilege name="http://developer.samsung.com/privilege/productinfo"/>
+
+    <!-- SETTINGS -->
+    <tizen:setting
+        screen-orientation="landscape"
+        context-menu="disable"
+        background-support="disable"
+        encryption="disable"
+        install-location="auto"
+        hwkey-event="enable"/>
+
+</widget>

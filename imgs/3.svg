@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
+   sodipodi:docname="TV Más (2018).svg"
+   viewBox="0 0 640 214"
+   height="214"
+   width="640"
+   id="svg2"
+   version="1.1">
+  <metadata
+     id="metadata8">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs6" />
+  <sodipodi:namedview
+     inkscape:current-layer="g10"
+     inkscape:window-maximized="1"
+     inkscape:window-y="-8"
+     inkscape:window-x="-8"
+     inkscape:cy="183.33891"
+     inkscape:cx="442.4939"
+     inkscape:zoom="1.1899281"
+     showgrid="true"
+     id="namedview4"
+     inkscape:window-height="1017"
+     inkscape:window-width="1920"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0"
+     guidetolerance="10"
+     gridtolerance="10"
+     objecttolerance="10"
+     borderopacity="1"
+     bordercolor="#666666"
+     pagecolor="#ffffff">
+    <inkscape:grid
+       id="grid841"
+       type="xygrid" />
+  </sodipodi:namedview>
+  <g
+     id="g10"
+     inkscape:label="Image"
+     inkscape:groupmode="layer">
+    <path
+       sodipodi:nodetypes="ccccccccc"
+       id="path837"
+       d="m 0,0 v 72 h 72 v 142 h 72 V 71 h 71 V 0 Z"
+       style="fill:#1a223e;fill-opacity:1;fill-rule:evenodd;stroke-width:112.669;stroke-linejoin:round" />
+    <path
+       sodipodi:nodetypes="cccccccc"
+       id="path839"
+       d="m 215,0 69,214 h 75 L 428,0 H 356 L 321.57683,104.0804 287,0 Z"
+       style="fill:#1a223e;fill-opacity:1;fill-rule:evenodd;stroke-width:112.669;stroke-linejoin:round" />
+    <path
+       sodipodi:nodetypes="ccccccccccccc"
+       id="path843"
+       d="M 500.01013,72.607528 429,73 v 69 h 71 v 72 h 69 v -72 l 70.93455,-0.0786 L 640,72 H 570 V 0 h -70 z"
+       style="fill:#3c69b1;fill-opacity:1;fill-rule:evenodd;stroke-width:39.8343;stroke-linejoin:round" />
+  </g>
+</svg>

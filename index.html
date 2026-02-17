@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920, height=1080, initial-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="application-name" content="IPTV Premium">
+    <title>IPTV Premium</title>
+    <!-- LOG ULTRA TEMPRANO - Verificar que el HTML se está cargando -->
+    <script>
+        (function() {
+            try {
+                // Múltiples métodos para asegurar que los logs aparezcan
+                console.log('🚀🚀🚀 [ULTRA INICIO] HTML cargando - Timestamp:', new Date().toISOString());
+                console.warn('🚀🚀🚀 [ULTRA INICIO] WARN - document.readyState:', document.readyState);
+                console.error('🚀🚀🚀 [ULTRA INICIO] ERROR TEST - window.location:', window.location.href);
+                
+                // Escribir a window inmediatamente
+                window.ULTRA_INICIO_EXECUTED = true;
+                window.ULTRA_INICIO_TIME = new Date().toISOString();
+                
+                // También intentar mostrar en pantalla
+                window.addEventListener('DOMContentLoaded', function() {
+                    const debugDiv = document.createElement('div');
+                    debugDiv.id = 'ultra-inicio-debug';
+                    debugDiv.style.cssText = 'position:fixed;top:50px;right:10px;background:rgba(255,0,0,0.9);color:white;padding:10px;font-size:14px;z-index:99998;max-width:300px;';
+                    debugDiv.textContent = 'ULTRA INICIO EJECUTADO - ' + new Date().toLocaleTimeString();
+                    document.body.appendChild(debugDiv);
+                });
+            } catch(e) {
+                // Intentar mostrar error de forma visible
+                alert('ERROR en ULTRA INICIO: ' + e.message);
+                console.error('ERROR FATAL en ULTRA INICIO:', e);
+            }
+        })();
+    </script>
+    <!-- HLS.js - CRÍTICO: Cargar con tag script DIRECTO (más confiable en webOS) -->
+    <script src="js/hls.min.js" 
+            onerror="console.error('❌ [HLS DIRECT] Error cargando js/hls.min.js'); console.error('❌ [HLS DIRECT] Intentando CDN...'); (function(){const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/hls.js@1.4.12/dist/hls.min.js';s.onerror=function(){console.error('❌ [HLS DIRECT] También falló CDN');};document.head.appendChild(s);})();"
+            onload="console.log('✅ [HLS DIRECT] Script tag onload - HLS.js cargado'); if(typeof Hls !== 'undefined') { window.Hls = Hls; window.HLS_LOADED = true; window.HLS_SCRIPT_STARTED = true; console.log('✅ [HLS DIRECT] HLS.js disponible:', typeof Hls); } else { console.warn('⚠️ [HLS DIRECT] Script cargó pero Hls no está definido'); }">
+    </script>
+    <script>
+        // Verificar que HLS.js se cargó después del tag script
+        (function() {
+            try {
+                console.log('🔍 [HLS VERIFY] Verificando HLS.js después de tag script...');
+                console.log('🔍 [HLS VERIFY] typeof Hls:', typeof Hls);
+                console.log('🔍 [HLS VERIFY] typeof window.Hls:', typeof window.Hls);
+                
+                // Establecer variables de diagnóstico
+                window.HLS_VERIFY_STARTED = true;
+                
+                // Esperar un momento para que el script se ejecute
+                setTimeout(function() {
+                    if (typeof Hls !== 'undefined') {
+                        window.Hls = Hls;
+                        window.HLS_LOADED = true;
+                        window.HLS_SCRIPT_STARTED = true;
+                        console.log('✅ [HLS VERIFY] HLS.js verificado y disponible');
+                        console.log('✅ [HLS VERIFY] HLS.js soportado:', Hls.isSupported ? Hls.isSupported() : 'N/A');
+                    } else if (typeof window.Hls !== 'undefined') {
+                        window.HLS_LOADED = true;
+                        window.HLS_SCRIPT_STARTED = true;
+                        console.log('✅ [HLS VERIFY] HLS.js encontrado en window.Hls');
+                    } else {
+                        console.warn('⚠️ [HLS VERIFY] HLS.js no disponible después de tag script');
+                        console.warn('⚠️ [HLS VERIFY] El fallback dinámico debería intentar cargar desde CDN');
+                    }
+                }, 500);
+            } catch(e) {
+                console.error('❌ [HLS VERIFY] ERROR:', e);
+            }
+        })();
+    </script>
+    <!-- On-screen debug logger (toggle with GREEN, clear with BLUE) -->
+    <script src="js/debugLogger.js"></script>
+    <script src="js/tizenAVPlayAdapter.js"></script>
+    <script src="js/tizenPlayerAdapter.js"></script>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/player.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- DEBUG: Indicador visual de que el HTML se cargó -->
+    <div id="debug-indicator" style="position: fixed; top: 10px; right: 10px; background: rgba(0,255,0,0.8); color: black; padding: 5px 10px; font-size: 12px; z-index: 99999; display: none;">
+        HTML Cargado
+    </div>
+    <script>
+        // Script inmediato después del body - verificar que se ejecuta
+        (function() {
+            try {
+                // Múltiples métodos de logging
+                console.log('🚀🚀🚀 [BODY SCRIPT] Script después del body ejecutado');
+                console.warn('🚀🚀🚀 [BODY SCRIPT] WARN TEST');
+                console.error('🚀🚀🚀 [BODY SCRIPT] ERROR TEST');
+                
+                // También escribir a window para verificar
+                window.BODY_SCRIPT_EXECUTED = true;
+                window.BODY_SCRIPT_TIME = new Date().toISOString();
+                
+                const indicator = document.getElementById('debug-indicator');
+                if (indicator) {
+                    indicator.style.display = 'block';
+                    indicator.textContent = 'HTML OK - ' + new Date().toLocaleTimeString();
+                }
+                
+                // Agregar más información al indicador
+                setTimeout(function() {
+                    if (indicator) {
+                        indicator.textContent = 'HTML OK - Body: ' + (window.BODY_SCRIPT_EXECUTED ? 'SI' : 'NO') + ' - ' + new Date().toLocaleTimeString();
+                    }
+                }, 1000);
+            } catch(e) {
+                console.error('ERROR en script del body:', e);
+                alert('ERROR en BODY SCRIPT: ' + e.message);
+            }
+        })();
+    </script>
+    <!-- Splash Screen -->
+    <div id="splash-screen" class="screen active">
+        <div class="splash-content">
+            <div class="splash-logo">
+                <img src="resources/IPTV PREMIUM.png" alt="IPTV Premium" class="splash-logo-image">
+                <p class="splash-subtitle">Televisión de Alta Calidad</p>
+            </div>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Screen -->
+    <div id="login-screen" class="screen">
+        <div class="login-container">
+            <div class="login-card">
+                <div class="login-header">
+                    <img src="resources/IPTV PREMIUM.png" alt="IPTV Premium" class="login-logo-image">
+                    <h2>Bienvenido</h2>
+                    <p>Ingresa tus credenciales para continuar</p>
+                </div>
+                <form id="login-form" class="login-form">
+                    <div class="input-group">
+                        <label for="username">Usuario</label>
+                        <input type="text" id="username" name="username" placeholder="Tu usuario" autocomplete="off" tabindex="1">
+                    </div>
+                    <div class="input-group">
+                        <label for="password">Contraseña</label>
+                        <input type="password" id="password" name="password" placeholder="Tu contraseña" autocomplete="off" tabindex="2">
+                    </div>
+                    <div class="button-group">
+                        <button type="submit" id="btn-login" class="btn btn-primary focusable" tabindex="3">
+                            <span class="btn-text">Iniciar Sesión</span>
+                            <span class="btn-loading" style="display: none;">Cargando...</span>
+                        </button>
+                        <button type="button" id="btn-exit" class="btn btn-secondary focusable" tabindex="4">Salir</button>
+                    </div>
+                </form>
+                <div id="login-error" class="error-message" style="display: none;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Screen (Channel List) -->
+    <div id="main-screen" class="screen">
+        <header class="main-header">
+            <div class="header-left">
+                <img src="resources/IPTV PREMIUM.png" alt="IPTV Premium" class="app-logo-image">
+            </div>
+            <div class="header-center">
+                <div class="search-container" id="search-container">
+                    <input type="text" id="search-input" class="search-input focusable" placeholder="Buscar canales..." tabindex="5">
+                    <button id="search-clear" class="search-clear focusable" tabindex="6">✕</button>
+                </div>
+            </div>
+            <div class="header-right">
+                <button id="btn-search" class="header-btn focusable" tabindex="7" title="Buscar">
+                    <img src="resources/lupa.png" alt="Buscar" class="header-btn-icon">
+                </button>
+                <button id="btn-refresh" class="header-btn focusable" tabindex="8" title="Refrescar">
+                    <img src="resources/recarga.png" alt="Refrescar" class="header-btn-icon">
+                </button>
+                <button id="btn-logout" class="header-btn focusable" tabindex="9" title="Cerrar Sesión">
+                    <img src="resources/cerrar-sesion.png" alt="Cerrar Sesión" class="header-btn-icon">
+                </button>
+            </div>
+        </header>
+        <main class="main-content">
+            <div id="loading-channels" class="loading-overlay">
+                <div class="spinner"></div>
+                <p>Cargando canales...</p>
+            </div>
+            
+            <!-- Categories Section -->
+            <div id="categories-section" class="categories-section" style="display: none;">
+                <div class="category-header">
+                    <h2 class="category-title">Categorías</h2>
+                </div>
+                <div id="categories-list" class="categories-list"></div>
+            </div>
+            
+            <!-- All Channels Grid -->
+            <div id="channels-section" class="channels-section">
+                <div class="section-header">
+                    <h2 class="section-title">Todos los Canales</h2>
+                    <span id="channels-count" class="channels-count">0 canales</span>
+                </div>
+                <div id="channels-grid" class="channels-grid"></div>
+            </div>
+            
+            <div id="no-channels" class="no-channels" style="display: none;">
+                <p>No se encontraron canales</p>
+            </div>
+        </main>
+        <!-- Channel Number Overlay -->
+        <div id="channel-number-overlay" class="channel-number-overlay" style="display: none;">
+            <span id="channel-number-text"></span>
+        </div>
+    </div>
+
+    <!-- Player Screen -->
+    <div id="player-screen" class="screen">
+        <div class="player-container">
+            <!-- Samsung AVPlay native player object (used by tizenAVPlayAdapter.js) -->
+            <object id="av-player" type="application/avplayer"
+                    style="position:absolute;top:0;left:0;width:1920px;height:1080px;z-index:0;visibility:hidden;"></object>
+            <video id="video-player" class="video-player" 
+                   playsinline webkit-playsinline x5-playsinline 
+                   preload="auto" controls="false"></video>
+            
+            <!-- Loading Animation -->
+            <div id="player-loading" class="player-loading">
+                <div class="loading-spinner"></div>
+                <p>Cargando canal...</p>
+            </div>
+            
+            <!-- Player Controls -->
+            <div id="player-controls" class="player-controls">
+                <div class="controls-top">
+                    <button id="btn-back" class="control-btn focusable" title="Volver">←</button>
+                    <div class="channel-info">
+                        <span id="channel-number-display" class="channel-number"></span>
+                        <span id="channel-name-display" class="channel-name"></span>
+                    </div>
+                    <div class="controls-top-right">
+                        <button id="btn-channel-list" class="control-btn focusable" title="Lista de Canales">☰</button>
+                        <button id="btn-quality" class="control-btn focusable" title="Calidad">⚙</button>
+                    </div>
+                </div>
+                <div class="controls-center">
+                    <button id="btn-prev-channel" class="control-btn large focusable" title="Canal Anterior">
+                        <img src="resources/abajo.png" alt="Canal Anterior" class="control-btn-icon">
+                    </button>
+                    <button id="btn-rewind" class="control-btn focusable" title="Retroceder">
+                        <img src="resources/atras.png" alt="Retroceder" class="control-btn-icon">
+                    </button>
+                    <button id="btn-play-pause" class="control-btn play-btn focusable" title="Play/Pause">
+                        <img src="resources/play.png" alt="Play/Pause" class="control-btn-icon play-pause-icon">
+                    </button>
+                    <button id="btn-forward" class="control-btn focusable" title="Adelantar">
+                        <img src="resources/adelantar.png" alt="Adelantar" class="control-btn-icon">
+                    </button>
+                    <button id="btn-next-channel" class="control-btn large focusable" title="Siguiente Canal">
+                        <img src="resources/arriba.png" alt="Siguiente Canal" class="control-btn-icon">
+                    </button>
+                </div>
+                <div class="controls-bottom">
+                    <span id="current-time" class="time-display">00:00</span>
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div id="progress-fill" class="progress-fill"></div>
+                        </div>
+                    </div>
+                    <span id="total-time" class="time-display">00:00</span>
+                </div>
+            </div>
+            
+            <!-- Channel Number Input Overlay -->
+            <div id="player-channel-overlay" class="player-channel-overlay" style="display: none;">
+                <span id="player-channel-text"></span>
+            </div>
+            
+            <!-- Error Notification -->
+            <div id="player-error-notification" class="player-error-notification" style="display: none;">
+                <div class="error-icon">⚠</div>
+                <div class="error-content">
+                    <div class="error-title">Error de Reproducción</div>
+                    <div class="error-message-text"></div>
+                </div>
+                <button id="btn-retry-channel" class="error-retry-btn focusable">Reintentar</button>
+            </div>
+        </div>
+        
+        <!-- Channel List Panel -->
+        <div id="channel-list-panel" class="channel-list-panel" style="display: none;">
+            <div class="panel-header">
+                <h3>Lista de Canales</h3>
+                <button id="btn-close-panel" class="close-panel-btn focusable">✕</button>
+            </div>
+            <div id="channel-list-content" class="channel-list-content"></div>
+        </div>
+        
+        <!-- Quality Selector -->
+        <div id="quality-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <h3>Calidad de Video</h3>
+                <div id="quality-options" class="quality-options"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts - Orden crítico: config primero, app último -->
+    <script src="js/config.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/m3uParser.js"></script>
+    <script src="js/logoDownloader.js"></script>
+    <script src="js/tizenAVPlayAdapter.js"></script>
+    <script src="js/tizenPlayerAdapter.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/player.js"></script>
+    <script src="js/app.js"></script>
+    <!-- Script de inicialización con manejo de errores - DEBE ir después de app.js -->
+    <script>
+        // Manejar errores globales no capturados (configurar antes de inicializar)
+        window.addEventListener('error', function(event) {
+            console.error('Error global no capturado:', event.error);
+            console.error('En archivo:', event.filename, 'línea:', event.lineno);
+            // No bloquear la ejecución, solo loguear
+        });
+        
+        // Manejar promesas rechazadas sin catch
+        window.addEventListener('unhandledrejection', function(event) {
+            console.error('Promesa rechazada sin manejar:', event.reason);
+            // No bloquear la ejecución
+        });
+        
+        // Verificar que todos los módulos críticos estén cargados antes de inicializar
+        window.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM cargado, verificando módulos...');
+            
+            const requiredModules = ['CONFIG', 'Storage', 'M3UParser', 'Navigation', 'Player', 'App'];
+            const missingModules = [];
+            
+            requiredModules.forEach(moduleName => {
+                if (typeof window[moduleName] === 'undefined') {
+                    missingModules.push(moduleName);
+                    console.error('Módulo faltante:', moduleName);
+                } else {
+                    console.log('✓ Módulo cargado:', moduleName);
+                }
+            });
+            
+            if (missingModules.length > 0) {
+                console.error('ERROR: Faltan módulos críticos:', missingModules);
+                // Intentar continuar de todas formas
+            }
+            
+            // Inicializar aplicación con retraso adicional para asegurar que todo esté listo
+            setTimeout(function() {
+                try {
+                    if (typeof App !== 'undefined' && App.init) {
+                        console.log('Inicializando aplicación...');
+                        App.init();
+                    } else {
+                        console.error('ERROR: App no está definido o no tiene método init');
+                        // Mostrar error en pantalla
+                        const splash = document.getElementById('splash-screen');
+                        if (splash) {
+                            splash.innerHTML = '<div class="splash-content"><h2>Error de Inicialización</h2><p>No se pudo cargar la aplicación</p></div>';
+                        }
+                    }
+                } catch (error) {
+                    console.error('Error crítico al inicializar:', error);
+                    console.error('Stack:', error.stack);
+                }
+            }, 100); // Pequeño delay adicional para asegurar que todo esté listo
+        });
+    </script>
+</body>
+</html>
+
