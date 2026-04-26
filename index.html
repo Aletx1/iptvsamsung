@@ -6,34 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="application-name" content="IPTV Premium">
     <title>IPTV Premium</title>
-    <!-- LOG ULTRA TEMPRANO - Verificar que el HTML se está cargando -->
-    <script>
-        (function() {
-            try {
-                // Múltiples métodos para asegurar que los logs aparezcan
-                console.log('🚀🚀🚀 [ULTRA INICIO] HTML cargando - Timestamp:', new Date().toISOString());
-                console.warn('🚀🚀🚀 [ULTRA INICIO] WARN - document.readyState:', document.readyState);
-                console.error('🚀🚀🚀 [ULTRA INICIO] ERROR TEST - window.location:', window.location.href);
-                
-                // Escribir a window inmediatamente
-                window.ULTRA_INICIO_EXECUTED = true;
-                window.ULTRA_INICIO_TIME = new Date().toISOString();
-                
-                // También intentar mostrar en pantalla
-                window.addEventListener('DOMContentLoaded', function() {
-                    const debugDiv = document.createElement('div');
-                    debugDiv.id = 'ultra-inicio-debug';
-                    debugDiv.style.cssText = 'position:fixed;top:50px;right:10px;background:rgba(255,0,0,0.9);color:white;padding:10px;font-size:14px;z-index:99998;max-width:300px;';
-                    debugDiv.textContent = 'ULTRA INICIO EJECUTADO - ' + new Date().toLocaleTimeString();
-                    document.body.appendChild(debugDiv);
-                });
-            } catch(e) {
-                // Intentar mostrar error de forma visible
-                alert('ERROR en ULTRA INICIO: ' + e.message);
-                console.error('ERROR FATAL en ULTRA INICIO:', e);
-            }
-        })();
-    </script>
+
     <!-- HLS.js - CRÍTICO: Cargar con tag script DIRECTO (más confiable en webOS) -->
     <script src="js/hls.min.js" 
             onerror="console.error('❌ [HLS DIRECT] Error cargando js/hls.min.js'); console.error('❌ [HLS DIRECT] Intentando CDN...'); (function(){const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/hls.js@1.4.12/dist/hls.min.js';s.onerror=function(){console.error('❌ [HLS DIRECT] También falló CDN');};document.head.appendChild(s);})();"
@@ -83,41 +56,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- DEBUG: Indicador visual de que el HTML se cargó -->
-    <div id="debug-indicator" style="position: fixed; top: 10px; right: 10px; background: rgba(0,255,0,0.8); color: black; padding: 5px 10px; font-size: 12px; z-index: 99999; display: none;">
-        HTML Cargado
-    </div>
-    <script>
-        // Script inmediato después del body - verificar que se ejecuta
-        (function() {
-            try {
-                // Múltiples métodos de logging
-                console.log('🚀🚀🚀 [BODY SCRIPT] Script después del body ejecutado');
-                console.warn('🚀🚀🚀 [BODY SCRIPT] WARN TEST');
-                console.error('🚀🚀🚀 [BODY SCRIPT] ERROR TEST');
-                
-                // También escribir a window para verificar
-                window.BODY_SCRIPT_EXECUTED = true;
-                window.BODY_SCRIPT_TIME = new Date().toISOString();
-                
-                const indicator = document.getElementById('debug-indicator');
-                if (indicator) {
-                    indicator.style.display = 'block';
-                    indicator.textContent = 'HTML OK - ' + new Date().toLocaleTimeString();
-                }
-                
-                // Agregar más información al indicador
-                setTimeout(function() {
-                    if (indicator) {
-                        indicator.textContent = 'HTML OK - Body: ' + (window.BODY_SCRIPT_EXECUTED ? 'SI' : 'NO') + ' - ' + new Date().toLocaleTimeString();
-                    }
-                }, 1000);
-            } catch(e) {
-                console.error('ERROR en script del body:', e);
-                alert('ERROR en BODY SCRIPT: ' + e.message);
-            }
-        })();
-    </script>
+
     <!-- Splash Screen -->
     <div id="splash-screen" class="screen active">
         <div class="splash-content">
@@ -229,6 +168,18 @@
                    playsinline webkit-playsinline x5-playsinline 
                    preload="auto" controls="false"></video>
             
+            <!-- Floating Channel List Button -->
+            <button id="btn-floating-channels" class="floating-channels-btn" style="display: none;" title="Lista de Canales">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="8" y1="6" x2="21" y2="6"></line>
+                    <line x1="8" y1="12" x2="21" y2="12"></line>
+                    <line x1="8" y1="18" x2="21" y2="18"></line>
+                    <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                    <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                    <line x1="3" y1="18" x2="3.01" y2="18"></line>
+                </svg>
+            </button>
+
             <!-- Loading Animation -->
             <div id="player-loading" class="player-loading">
                 <div class="loading-spinner"></div>

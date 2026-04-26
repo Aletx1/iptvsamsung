@@ -200,19 +200,19 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 80px 120px;
-    gap: 32px;
+    padding: 80px 100px;
+    gap: 28px;
     background: var(--bg-primary);
 }
 
 .input-group {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
 }
 
 .input-group label {
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 500;
     color: var(--text-secondary);
     text-transform: uppercase;
@@ -221,19 +221,20 @@
 
 .input-group input {
     width: 100%;
-    padding: 24px 28px;
+    padding: 20px 24px;
     background: var(--bg-tertiary);
     border: 2px solid rgba(255, 255, 255, 0.08);
     border-radius: 12px;
     color: var(--text-primary);
     font-family: var(--font-family);
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     transition: all 0.25s ease;
+    box-sizing: border-box;
 }
 
 .input-group input::placeholder {
     color: var(--text-muted);
-    font-size: 1.1rem;
+    font-size: 1.05rem;
 }
 
 .input-group input:focus {
@@ -246,42 +247,53 @@
 
 .button-group {
     display: flex;
-    gap: 20px;
-    margin-top: 16px;
+    gap: 16px;
+    margin-top: 12px;
 }
 
 .button-group .btn {
     flex: 1;
-    padding: 22px 40px;
-    font-size: 1.2rem;
+    padding: 20px 32px;
+    font-size: 1.1rem;
     font-weight: 600;
     border-radius: 12px;
     text-transform: uppercase;
     letter-spacing: 2px;
     transition: all 0.25s ease;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    box-sizing: border-box;
+    min-height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-primary);
 }
 
 .btn-primary {
     background: var(--gradient-primary);
     box-shadow: 0 4px 15px rgba(26, 115, 232, 0.35);
+    border: 2px solid transparent;
 }
 
 .btn-primary:focus {
-    transform: scale(1.02);
+    transform: scale(1.03);
     box-shadow: 
         0 0 0 3px rgba(26, 115, 232, 0.3),
         0 6px 20px rgba(26, 115, 232, 0.5);
+    border-color: var(--primary-light);
 }
 
 .btn-secondary {
     background: var(--bg-tertiary);
-    border: 2px solid rgba(255, 255, 255, 0.08);
+    border: 2px solid rgba(255, 255, 255, 0.1);
 }
 
 .btn-secondary:focus {
-    transform: scale(1.02);
+    transform: scale(1.03);
     background: var(--bg-card);
-    border-color: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.2);
     box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.08);
 }
 
@@ -290,10 +302,18 @@
     overflow: hidden;
 }
 
+#btn-login .btn-text,
+#btn-login .btn-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 #btn-login .btn-loading {
     position: absolute;
     left: 50%;
-    transform: translateX(-50%);
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
 #btn-login.loading .btn-text {
@@ -306,13 +326,13 @@
 
 /* Error Message */
 .error-message {
-    padding: 20px 24px;
+    padding: 16px 20px;
     background: rgba(239, 68, 68, 0.12);
     border: 1px solid rgba(239, 68, 68, 0.4);
-    border-radius: 10px;
+    border-radius: 12px;
     color: #fca5a5;
     text-align: center;
-    font-size: 1.1rem;
+    font-size: 1rem;
     animation: fadeIn 0.3s ease;
 }
 

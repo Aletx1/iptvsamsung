@@ -49,7 +49,7 @@
     font-size: 1.25rem;
 }
 
-/* Player Controls */
+/* Player Controls - Only progress bar visible; buttons hidden (remote-only) */
 .player-controls {
     position: absolute;
     top: 0;
@@ -58,29 +58,28 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-end;
     padding: var(--spacing-xl);
     background: linear-gradient(
         to bottom,
-        rgba(0, 0, 0, 0.8) 0%,
-        transparent 20%,
+        transparent 0%,
         transparent 80%,
         rgba(0, 0, 0, 0.8) 100%
     );
     opacity: 0;
+    pointer-events: none;
     transition: opacity var(--transition-normal);
     z-index: 20;
 }
 
 .player-controls.visible {
     opacity: 1;
+    pointer-events: auto;
 }
 
-/* Controls Top */
+/* Controls Top - Hidden (remote-only) */
 .controls-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    display: none;
 }
 
 .channel-info {
@@ -108,12 +107,9 @@
     gap: var(--spacing-md);
 }
 
-/* Controls Center */
+/* Controls Center - Hidden (remote-only) */
 .controls-center {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--spacing-xl);
+    display: none;
 }
 
 /* Control Buttons */
@@ -280,24 +276,62 @@
     transition: width 0.1s linear;
 }
 
+/* Floating Channel List Button */
+.floating-channels-btn {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    z-index: 25;
+    transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    outline: none;
+    padding: 0;
+}
+
+.floating-channels-btn:hover,
+.floating-channels-btn:focus {
+    background: rgba(26, 115, 232, 0.4);
+    border-color: rgba(26, 115, 232, 0.6);
+    color: #ffffff;
+    box-shadow: 0 4px 20px rgba(26, 115, 232, 0.3);
+}
+
+.floating-channels-btn:active {
+    background: rgba(26, 115, 232, 0.6);
+}
+
+.floating-channels-btn svg {
+    width: 24px;
+    height: 24px;
+}
+
 /* Channel List Panel */
 .channel-list-panel {
     position: absolute;
     top: 0;
-    right: 0;
-    width: 400px;
+    left: 0;
+    width: 520px;
     height: 100%;
-    background: var(--bg-secondary);
-    border-left: 1px solid rgba(255, 255, 255, 0.06);
+    background: rgba(11, 14, 17, 0.97);
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
     display: flex;
     flex-direction: column;
-    z-index: 30;
-    animation: slideInRight var(--transition-normal);
+    z-index: 35;
+    animation: slideInLeft 0.25s ease forwards;
 }
 
-@keyframes slideInRight {
+@keyframes slideInLeft {
     from {
-        transform: translateX(100%);
+        transform: translateX(-100%);
     }
     to {
         transform: translateX(0);
@@ -308,8 +342,9 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: var(--spacing-lg);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 20px 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.02);
 }
 
 .panel-header h3 {
@@ -344,49 +379,107 @@
     padding: var(--spacing-md);
 }
 
-/* Channel List Item - Minimalist */
+/* Channel List Item - With Logo */
 .channel-list-item {
     display: flex;
     align-items: center;
-    gap: var(--spacing-md);
-    padding: var(--spacing-md);
-    background: var(--bg-tertiary);
-    border-radius: var(--radius-md);
-    margin-bottom: var(--spacing-sm);
+    gap: 14px;
+    padding: 10px 14px;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 10px;
+    margin-bottom: 6px;
     cursor: pointer;
-    transition: all var(--transition-fast);
-    border: 2px solid rgba(255, 255, 255, 0.06);
+    transition: all 0.2s ease;
+    border: 2px solid transparent;
+}
+
+.channel-list-item:hover {
+    background: rgba(255, 255, 255, 0.08);
 }
 
 .channel-list-item:focus {
-    background: var(--bg-card);
+    background: rgba(26, 115, 232, 0.15);
     border-color: var(--primary);
     outline: none;
-    box-shadow: 0 0 16px rgba(26, 115, 232, 0.4);
+    box-shadow: 0 0 12px rgba(26, 115, 232, 0.3);
 }
 
 .channel-list-item.active {
-    background: var(--primary);
+    background: rgba(26, 115, 232, 0.25);
     border-color: var(--primary);
 }
 
+.channel-list-logo {
+    width: 44px;
+    height: 44px;
+    border-radius: 8px;
+    object-fit: contain;
+    background: rgba(255, 255, 255, 0.06);
+    flex-shrink: 0;
+    padding: 4px;
+}
+
+.channel-list-logo-placeholder {
+    width: 44px;
+    height: 44px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    flex-shrink: 0;
+    text-transform: uppercase;
+}
+
+.channel-list-info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
 .channel-list-number {
-    font-weight: 700;
-    font-size: 1rem;
-    color: var(--text-secondary);
-    min-width: 40px;
+    font-weight: 600;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1;
 }
 
 .channel-list-item.active .channel-list-number {
-    color: var(--text-primary);
+    color: var(--primary-light);
 }
 
 .channel-list-name {
-    flex: 1;
-    font-size: 1rem;
+    font-size: 0.95rem;
+    font-weight: 500;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    color: var(--text-primary);
+    line-height: 1.3;
+}
+
+.channel-list-item.active .channel-list-name {
+    color: #ffffff;
+}
+
+.channel-list-playing-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--primary);
+    box-shadow: 0 0 8px rgba(26, 115, 232, 0.6);
+    flex-shrink: 0;
+    animation: pulseIndicator 1.5s ease-in-out infinite;
+}
+
+@keyframes pulseIndicator {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
 }
 
 /* Quality Options */

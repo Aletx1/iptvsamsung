@@ -206,6 +206,9 @@ const Player = {
         document.getElementById('btn-close-panel').addEventListener('click', () => this.closeChannelList());
         document.getElementById('btn-retry-channel').addEventListener('click', () => this.retryCurrentChannel());
         
+        // Floating channel list button
+        document.getElementById('btn-floating-channels').addEventListener('click', () => this.toggleChannelList());
+        
         // Click en el video para mostrar/ocultar controles
         this.video.addEventListener('click', () => this.toggleControls());
         
@@ -225,6 +228,10 @@ const Player = {
         
         const channel = channels[index];
         if (!channel) return;
+        
+        // Show floating channel list button
+        const floatingBtn = document.getElementById('btn-floating-channels');
+        if (floatingBtn) floatingBtn.style.display = 'flex';
         
         // Limpiar timers y estados anteriores
         this.clearAllTimers();
@@ -1887,6 +1894,10 @@ const Player = {
         this.hideLoading();
         clearTimeout(this.controlsTimer);
         
+        // Hide floating channel list button
+        const floatingBtn = document.getElementById('btn-floating-channels');
+        if (floatingBtn) floatingBtn.style.display = 'none';
+        
         this.retryCount = 0;
         this.stuckCheckCount = 0;
         this.lastVideoTime = 0;
@@ -2419,13 +2430,32 @@ const Player = {
         const panel = document.getElementById('channel-list-panel');
         const content = document.getElementById('channel-list-content');
         
-        content.innerHTML = this.channels.map((channel, index) => `
-            <div class="channel-list-item focusable ${index === this.currentIndex ? 'active' : ''}" 
-                 data-index="${index}" tabindex="0">
-                <span class="channel-list-number">${channel.number}</span>
-                <span class="channel-list-name">${channel.name}</span>
-            </div>
-        `).join('');
+        // Hide floating button while panel is open
+        const floatingBtn = document.getElementById('btn-floating-channels');
+        if (floatingBtn) floatingBtn.style.display = 'none';
+        
+        content.innerHTML = this.channels.map((channel, index) => {
+            const isActive = index === this.currentIndex;
+            const hasLogo = channel.logo && channel.logo.trim() !== '';
+            const initials = (channel.name || 'CH').substring(0, 2).toUpperCase();
+            
+            const logoHtml = hasLogo
+                ? `<img src="${channel.logo}" alt="" class="channel-list-logo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                   <span class="channel-list-logo-placeholder" style="display:none;">${initials}</span>`
+                : `<img style="display:none;"><span class="channel-list-logo-placeholder">${initials}</span>`;
+            
+            return `
+                <div class="channel-list-item focusable ${isActive ? 'active' : ''}" 
+                     data-index="${index}" tabindex="0">
+                    ${logoHtml}
+                    <div class="channel-list-info">
+                        <span class="channel-list-number">CH ${channel.number}</span>
+                        <span class="channel-list-name">${channel.name}</span>
+                    </div>
+                    ${isActive ? '<span class="channel-list-playing-indicator"></span>' : ''}
+                </div>
+            `;
+        }).join('');
         
         content.querySelectorAll('.channel-list-item').forEach(item => {
             item.addEventListener('click', () => {
@@ -2449,6 +2479,11 @@ const Player = {
      */
     closeChannelList() {
         document.getElementById('channel-list-panel').style.display = 'none';
+        // Restore floating button if playing
+        if (this.channels.length > 0 && this.currentIndex >= 0) {
+            const floatingBtn = document.getElementById('btn-floating-channels');
+            if (floatingBtn) floatingBtn.style.display = 'flex';
+        }
     },
     
     /**
@@ -2506,7 +2541,20 @@ const Player = {
         
         if (App.currentScreen !== 'player-screen') return;
         
-        if (!this.controlsVisible) {
+        // Always allow these keys even when controls are hidden
+        const alwaysAllowed = [
+            CONFIG.KEYS.ENTER, CONFIG.KEYS.OK,
+            CONFIG.KEYS.PLAY, CONFIG.KEYS.PAUSE, CONFIG.KEYS.PLAY_PAUSE,
+            CONFIG.KEYS.UP, CONFIG.KEYS.DOWN,
+            CONFIG.KEYS.CHANNEL_UP, CONFIG.KEYS.CHANNEL_DOWN,
+            CONFIG.KEYS.NEXT, CONFIG.KEYS.PREVIOUS,
+            CONFIG.KEYS.REWIND, CONFIG.KEYS.FAST_FORWARD,
+            CONFIG.KEYS.STOP
+        ];
+        
+        const isNumber = Navigation.isNumberKey(keyCode);
+        
+        if (!this.controlsVisible && !alwaysAllowed.includes(keyCode) && !isNumber) {
             this.showControls();
             return;
         }
@@ -2540,6 +2588,10 @@ const Player = {
                 break;
             case CONFIG.KEYS.FAST_FORWARD:
                 this.forward();
+                break;
+            case CONFIG.KEYS.ENTER:
+            case CONFIG.KEYS.OK:
+                this.togglePlayPause();
                 break;
             case CONFIG.KEYS.INFO:
             case CONFIG.KEYS.GUIDE:
