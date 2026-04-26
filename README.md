@@ -29,7 +29,7 @@ La aplicación está diseñada para ejecutarse en entornos Smart TV, considerand
 ---
 ### Opción 2: Instalación mediante archivo `.wgt`
 El archivo ejecutable se encuentra en:
-/build/iptvsamsung.wgt
+/iptvsamsung/iptvsamsung.wgt
 Pasos:
 
 1. Activar **Developer Mode** en la TV Samsung  
